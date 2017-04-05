@@ -1,0 +1,44 @@
+composer create-project laravel/laravel NombreProyecto
+Configuracion laravel:
+#cambiar nombre de la aplicacion
+php artisan app:name nombreAplicacion
+#modo debug: cambiar false por true
+	config -> app.php : 'debug' => env('APP_DEBUG', true),
+#timezone
+	config -> app.php : 'timezone' => 'zonaHorariaAdmitidaporPHP',
+#language
+	#resources -> lang -> clonar carpeta de lang en español "es" para laravel 5
+	config -> app.php : 'locale' => 'es',
+#Routes
+# se encuentra en routes
+	#estructura basica
+	Route::get('foo', function () {
+    	return 'Hello World';
+	});
+	#enrutando controlador
+	Route::resource('photos', 'PhotoController');
+	#enrutando controlador con una funcion dentro llamado show
+	Route::get('user', 'UserController@show');
+	#App\Http\Controllers\Photos\AdminController
+	Route::get('foo', 'Photos\AdminController@method');
+
+#Controller
+#se encuentra en app/Http/Controllers
+	php artisan make:controller PhotoController --resource
+	#funcion dentro un controlador q retorna una vista
+	#resources/views/admin/profile.blade.php
+	public function index()
+    {
+        return view('admin.profile', $data);
+    }
+#vistas
+#se encuentra en resources/views
+#creacion de vistas 
+	#plantillas/principal.blade.php
+
+#blade
+	#contenido dentro de la plantilla principal
+	 @yield('contenido')
+	 #extender de la plantilla principal en otro archivo.blade.php
+	 @extends('plantillas.principal')
+	 @section('contenido')
